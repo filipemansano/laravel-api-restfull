@@ -28,7 +28,7 @@ class CreateFilmsTable extends Migration
             $table->tinyInteger('rating');
             $table->decimal('ticket_price', 10, 2);
             $table->string('country', 50);
-            $table->string('photo', 32);
+            $table->string('photo', 100);
             $table->timestamps();
         });
     }
