@@ -26,6 +26,5 @@ Route::resource('register', 'Auth\RegisterController');
 Route::resource('login', 'Auth\LoginController');
 
 Route::resource('films', 'FilmsController');
-Route::resource('films', 'FilmsController');
 Route::resource('comments', 'CommentsController');
 Route::resource('genres', 'GenresController');
