@@ -22,7 +22,8 @@ class CreateFilmsTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
 
-            $table->string('name', 200);
+            $table->string('name', 100);
+            $table->string('slug_name', 100)->unique();
             $table->text('description');
             $table->dateTime('release_date');
             $table->tinyInteger('rating');

@@ -57,12 +57,21 @@ class FilmsController extends Controller
         $bodyContent = json_decode($request->getContent(), true);
 
         $validator = $this->validator($bodyContent);
-
+        
         if ($validator->fails()) { 
             return response()->json(['error'=>$validator->errors()], 400);
         }
 
+        // remove all non-ascii character, replace one or plus spaces to - and set string to lower case
+        $slugName = strtolower(preg_replace("/\s+/","-",preg_replace('/[~\'`^]/', null, iconv ('UTF-8', 'ASCII//TRANSLIT', $bodyContent['name']))));
+        $film = Film::where('slug_name', $slugName)->first();
+
+        if(!is_null($film)){
+            return response()->json([ 'msg' => 'name is already exists.'], 400);
+        }
+        
         $loggedUser = JWTAuth::toUser(JWTAuth::getToken());
+        
 
         // get image info, and create a randon name
         $imgType = explode("/",$this->getMimeTypeByBase64($bodyContent['photo']));
@@ -78,6 +87,7 @@ class FilmsController extends Controller
             $film = Film::create([
                 'user_id'       => $loggedUser->id,
                 'name'          => $bodyContent['name'],
+                'slug_name'     => $slugName,
                 'description'   => $bodyContent['description'],
                 'release_date'  => $bodyContent['release_date'],
                 'rating'        => $bodyContent['rating'],

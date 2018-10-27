@@ -11,6 +11,7 @@ class Film extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'slug_name',
         'description',
         'release_date',
         'rating',
