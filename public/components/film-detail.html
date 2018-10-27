@@ -1,38 +1,63 @@
-<div class="row">
-    <div class="col-lg-6">
-        <h1>{{ vm.film.name }}</h1>
-        <h4>{{ vm.film.description }} <small class="text-muted">(Release date: {{ vm.film.release_date|date }})</small></h4>
-        <h5>Ticket Price: U$ {{ vm.film.ticket_price | number:2 }}</h5>
-        <h6>Country: {{ vm.film.country }} </h6>
-    </div>
-    <div class="col-lg-6">
+<section class="jumbotron text-center">
+    <div class="container">
 
-        <div class="text-right">
-            <div class="rating-block float-right" style="max-width:300px;">
-                <h4>Average user rating</h4>
-                <h2 class="bold padding-bottom-7">{{ vm.film.rating }} <small>/ 5</small></h2>
-                <button type="button" class="btn btn-sm mr-1" ng-class="{'btn-warning': vm.film.rating >= rating, 'btn-default': vm.film.rating < rating}"
-                    ng-repeat="rating in [1,2,3,4,5]">
-                    <i class="fa fa-star"></i>
-                </button>
+        <img src="img/films/{{ vm.film.photo }}" alt="" />
+        <p>
+            <a style="color:white;" ng-disabled="vm.loading" ng-click="vm.changeFilm('previous')" ng-show="vm.films.current > 1"
+                class="btn btn-secondary my-2"><i class="fa fa-angle-left"></i> Previous Film</a>
+            <a style="color:white;" ng-disabled="vm.loading" ng-click="vm.changeFilm('next')" ng-show="vm.films.total > vm.films.current"
+                class="btn btn-primary my-2">Next Film <i class="fa fa-angle-right"></i> </a>
+        </p>
+    </div>
+</section>
+<div class="album py-5 bg-light">
+    <div class="container">
+        <div ng-show="vm.loading" class="text-center"><i class="fa fa-sync fa-spin fa-3x"></i></div>
+
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>{{ vm.film.name }}</h1>
+                <h4>{{ vm.film.description }} <small class="text-muted">(Release date: {{ vm.film.release_date|date }})</small></h4>
+                <h5>Ticket Price: U$ {{ vm.film.ticket_price | number:2 }}</h5>
+                <h6>Country: {{ vm.film.country }} </h6>
+            </div>
+            <div class="col-lg-6">
+
+                <div class="text-right">
+                    <div class="rating-block float-right" style="max-width:300px;">
+                        <h4>Average user rating</h4>
+                        <h2 class="bold padding-bottom-7">{{ vm.film.rating }} <small>/ 5</small></h2>
+                        <button type="button" class="btn btn-sm mr-1" ng-class="{'btn-warning': vm.film.rating >= rating, 'btn-default': vm.film.rating < rating}"
+                            ng-repeat="rating in [1,2,3,4,5]">
+                            <i class="fa fa-star"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+
             </div>
         </div>
 
-        <div class="clearfix"></div>
+        <hr />
+        <h4>Comments</h4>
 
-    </div>
-</div>
+        <div>
+            <div class="card card-default mt-2" ng-repeat="comment in vm.film.comments">
+                <div class="card-header">
+                    <strong>{{ comment.user.name }}</strong> <span class="text-muted">{{ comment.user.created_at |
+                        date: "yyyy-MM-ddTHH:mm:ss" }}</span>
+                </div>
+                <div class="card-body">
+                    {{ comment.comment }}
+                </div><!-- /panel-body -->
+            </div>
 
-<hr />
-<h4>Comments</h4>
-
-<div>
-    <div class="card card-default mt-2" ng-repeat="comment in vm.film.comments">
-        <div class="card-header">
-            <strong>{{ comment.user.name }}</strong> <span class="text-muted">{{ comment.user.created_at | date: "yyyy-MM-ddTHH:mm:ss" }}</span>
+            <hr/>
+            <div ng-if="vm.user.logged">
+                <textarea ng-disabled="vm.sending" ng-model="vm.comment" class="form-control mb-2" placeholder="Type your comment here" rows="3"></textarea>
+                <button ng-disabled="vm.sending" type="button" ng-click="vm.post()" class="btn btn-primary w-100">Post</button>
+            </div>
         </div>
-        <div class="card-body">
-            {{ comment.comment }}
-        </div><!-- /panel-body -->
     </div>
 </div>

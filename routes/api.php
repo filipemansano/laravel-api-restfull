@@ -25,6 +25,6 @@ Route::group(array('prefix' => 'films'), function(){
 });
 
 Route::group(array('prefix' => 'comments'), function(){
-    Route::get('create', ['as' => 'comments.create', 'uses' => 'CommentsController@create']);
+    Route::post('create', ['as' => 'comments.create', 'uses' => 'CommentsController@create']);
     Route::get('film/{id}', ['as' => 'comments.search.film', 'uses' => 'CommentsController@searchByFilm'])->where('id', '[0-9]+');
 });

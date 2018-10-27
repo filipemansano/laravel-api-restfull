@@ -21,52 +21,67 @@
 
 <body ng-app="film">
     <header>
-        <div class="collapse bg-dark" id="navbarHeader">
+        <div class="collapse bg-dark" id="navbarHeader" ng-if="!user.logged">
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-8 col-md-7 py-4">
-                        <h4 class="text-white">About</h4>
-                        <p class="text-muted">Add some information about the album below, the author, or any other
-                            background context. Make it a few sentences long so folks can pick up some informative
-                            tidbits. Then, link them off to some social networking sites or contact information.</p>
+                <div class="row" ng-controller="Auth as a">
+                    <div class="col-md-6 py-4">
+                        <h4 class="text-white">Sign in</h4>
+                        <input ng-disabled="a.sending" ng-model="a.signin_info.email" type="email" class="form-control mb-2" placeholder="E-mail"/>
+                        <input ng-disabled="a.sending" ng-model="a.signin_info.password" type="password" class="form-control mb-2" placeholder="Password"/>
+                        <button ng-disabled="a.sending" ng-click="a.signin()" type="button" class="btn btn-primary w-100">
+                            <i class="fa fa-lock"></i> Login
+                        </button>
                     </div>
-                    <div class="col-sm-4 offset-md-1 py-4">
-                        <h4 class="text-white">Contact</h4>
-                        <ul class="list-unstyled">
-                            <li>
-                                <a href="#" class="text-white">Follow on Twitter</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-white">Like on Facebook</a>
-                            </li>
-                            <li>
-                                <a href="#" class="text-white">Email me</a>
-                            </li>
-                        </ul>
+                    <div class="col-md-6 py-4">
+                        <h4 class="text-white">Sign up</h4>
+                        <div class="row">
+                            <div class="col-6">
+                                <input ng-model="a.signup_info.name" ng-disabled="a.sending" type="nome" class="form-control mb-2" placeholder="Name"/>
+                            </div>
+                            <div class="col-6">
+                                <input ng-model="a.signup_info.email" ng-disabled="a.sending" type="email" class="form-control mb-2" placeholder="E-mail"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <input ng-model="a.signup_info.password" ng-disabled="a.sending" type="password" class="form-control mb-2" placeholder="Password"/>
+                            </div>
+                            <div class="col-6">
+                                <input ng-model="a.signup_info.password_confirmation" ng-disabled="a.sending" type="password" class="form-control mb-2" placeholder="Confirm Password"/>
+                            </div>
+                        </div>
+                        <button ng-disabled="a.sending" ng-click="a.signup()" type="button" class="btn btn-primary w-100">
+                            <i class="fa fa-lock"></i> Register
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="navbar navbar-dark bg-dark box-shadow">
             <div class="container d-flex justify-content-between">
-                <a href="#" class="navbar-brand d-flex align-items-center">
+                <a href="/#!/films" class="navbar-brand d-flex align-items-center">
                     <strong>Film Album</strong> <i id="loading" class="fa fa-sync fa-spin"></i>
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                
+                <button ng-if="!user.logged" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span> Login / Register
                 </button>
+
+                <span class="text-white" ng-show="user.logged">Bem vindo <span ng-bind="user.name"></span></span>
             </div>
         </div>
     </header>
     <main role="main">
-        <ui-view> Carregando... </ui-view>
+        <ui-view>
+            <div class="text-center">
+                Loading... 
+            </div>
+        </ui-view>
     </main>
     <footer class="text-muted">
         <div class="container">
-            <p class="float-right">
-                <a href="#">Back to top</a>
-            </p>
+            
             <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
             <p>New to Bootstrap?
                 <a href="../../">Visit the homepage</a> or read our
@@ -86,7 +101,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.20/angular-ui-router.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
+
     <script type="text/javascript">
         var ENDPOINT = "<?=$ENDPOINT?>";
     </script>
@@ -95,6 +111,7 @@
     <script type="text/javascript" src="{{{ asset('js/app.js') }}}"></script>
     <script type="text/javascript" src="{{{ asset('js/films.component.js') }}}"></script>
     <script type="text/javascript" src="{{{ asset('js/films-detail.component.js') }}}"></script>
+    <script type="text/javascript" src="{{{ asset('js/auth.controller.js') }}}"></script>
     
 </body>
 

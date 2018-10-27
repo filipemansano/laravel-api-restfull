@@ -59,6 +59,6 @@ class LoginController extends Controller
             return response()->json(['msg' => 'Failed to login, please try again.'], 500);
         }
 
-        return response()->json(['token' => $token], 200);
+        return response()->json(['token' => $token, 'name' => $user->name], 200);
     }
 }

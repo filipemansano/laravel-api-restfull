@@ -12,10 +12,9 @@
             templateUrl: 'components/films.html'
         });
 
-    function FilmController(AjaxService,$state) {
+    function FilmController($state) {
 
         var vm = this;
-        vm.loading = false;
         vm.changeFilm = changeFilm;
         return vm;
 
@@ -28,15 +27,7 @@
                 ++pag;
             }
 
-            vm.loading = true;
-            AjaxService.request("GET", "films/" + pag , {}).then(
-                function(film){
-                    vm.films = film;
-                    $state.go("filmDetail", { slugName: film.film.slug_name});
-                }
-            ).finally(function(){
-                vm.loading = false;
-            });
+            $state.go("filmsPag", {"pag": pag});
         }
     }
 })();
