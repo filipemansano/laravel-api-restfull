@@ -12,5 +12,6 @@
 */
 
 Route::get('/', function () {
-    return redirect('api');
+    $ENDPOINT = URL::to('/');
+    return View::make('app')->with('ENDPOINT', $ENDPOINT);
 });

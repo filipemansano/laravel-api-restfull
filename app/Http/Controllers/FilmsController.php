@@ -12,13 +12,39 @@ class FilmsController extends Controller
     private $imgPath;
 
     public function __construct(){
-        $this->middleware('jwt.auth', ['except' => ['index','show']]);
+        
+        $this->middleware('jwt.auth')->only('create');
         $this->imgPath = public_path() . "/img/films";
     }
 
-    public function index(){
-        $films = Film::all();
-        return response()->json($films);
+    public function index(Request $request, $pag){
+
+        $pag = ($pag < 1) ? 1 : intval($pag);
+
+        $film = Film::skip($pag - 1)->take(1)->get();
+
+        if(is_null($film)){
+            return response()->json(['msg' => 'film not exists'], 404);
+        }
+        
+        $total = Film::count();
+
+        return response()->json([
+            'total' => $total,
+            'current' => $pag,
+            'film'  => $film
+        ]);
+    }
+
+    public function search(Request $request, $slug){
+
+        $film = Film::where("slug_name", $slug)->first();
+
+        if(is_null($film)){
+            return response()->json(['msg' => 'film not exists'], 404);
+        }
+
+        return response()->json($film);
     }
 
     // get mime type by base64 image
@@ -34,7 +60,7 @@ class FilmsController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    private function validator(array $data)
     {
         Validator::extend('is_image',function($attribute, $value, $params, $validator) {
             $result = $this->getMimeTypeByBase64($value);
@@ -52,7 +78,7 @@ class FilmsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $bodyContent = json_decode($request->getContent(), true);
 

@@ -10,17 +10,18 @@ use Illuminate\Http\Request;
 
 class CommentsController extends Controller
 {
-    public function __construct(){
-        $this->middleware('jwt.auth');
-    }
 
+    public function __construct(){
+        $this->middleware('jwt.auth')->only('create');
+    }
+    
     /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    private function validator(array $data)
     {
         return Validator::make($data, [
             'comment' => 'required|string',
@@ -28,7 +29,7 @@ class CommentsController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
     {
         $bodyContent = json_decode($request->getContent(), true);
 

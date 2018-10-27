@@ -12,14 +12,6 @@ use JWTException;
 
 class LoginController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-    }
 
     /**
      * Get a validator for an incoming registration request.
@@ -27,7 +19,7 @@ class LoginController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    private function validator(array $data)
     {
         return Validator::make($data, [
             'email' => 'required|string|email|max:255',
@@ -35,7 +27,7 @@ class LoginController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function login(Request $request){
 
         $bodyContent = json_decode($request->getContent(), true);
 
