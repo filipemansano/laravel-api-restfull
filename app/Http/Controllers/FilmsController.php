@@ -21,12 +21,12 @@ class FilmsController extends Controller
 
         $pag = ($pag < 1) ? 1 : intval($pag);
 
-        $film = Film::skip($pag - 1)->take(1)->get();
+        $film = Film::skip($pag - 1)->take(1)->first();
 
         if(is_null($film)){
             return response()->json(['msg' => 'film not exists'], 404);
         }
-        
+
         $total = Film::count();
 
         return response()->json([

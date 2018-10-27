@@ -40,7 +40,7 @@
             component: 'films',
             resolve: {
                 films: function (AjaxService) {
-                    return AjaxService.request("GET", "films", {});
+                    return AjaxService.request("GET", "films/1", {});
                 }
             }
         });
