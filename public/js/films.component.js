@@ -5,14 +5,14 @@
         .module('film')
         .component('films', {
             bindings: {
-                films: '='
+                films: '<'
             },
             controller: FilmController,
             controllerAs: 'vm',
             templateUrl: 'components/films.html'
         });
 
-    function FilmController(AjaxService) {
+    function FilmController(AjaxService,$state) {
 
         var vm = this;
         vm.loading = false;

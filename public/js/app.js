@@ -42,18 +42,19 @@
                 films: function (AjaxService) {
                     return AjaxService.request("GET", "films/1", {});
                 }
-            }
+            },
         });
 
-        /*$stateProvider.state('film.detail', {
+        $stateProvider.state('filmDetail', {
             url: '/:slugName',
+            parent: 'films',
             component: 'filmDetail',
             resolve: {
-                user: function ($transition$, AjaxService) {
+                film: function ($transition$, AjaxService) {
                     return AjaxService.request("GET", "films/" + $transition$.params().slugName, {});
                 }
             }
-        });*/
+        });
 
     }
 

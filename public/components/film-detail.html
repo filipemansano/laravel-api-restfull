@@ -1,0 +1,23 @@
+<div class="row">
+    <div class="col-lg-6">
+        <h1>{{ vm.film.name }}</h1>
+        <h4>{{ vm.film.description }} <small class="text-muted">(Release date: {{ vm.film.release_date|date }})</small></h4>
+        <h5>Ticket Price: U$ {{ vm.film.ticket_price | number:2 }}</h5>
+        <h6>Country: {{ vm.film.country }} </h6>
+    </div>
+    <div class="col-lg-6">
+
+        <div class="text-right">
+            <div class="rating-block float-right" style="max-width:300px;">
+                <h4>Average user rating</h4>
+                <h2 class="bold padding-bottom-7">{{ vm.film.rating }} <small>/ 5</small></h2>
+                <button type="button" class="btn btn-sm mr-1" ng-class="{'btn-warning': vm.film.rating >= rating, 'btn-default': vm.film.rating < rating}" ng-repeat="rating in [1,2,3,4,5]">
+                    <i class="fa fa-star"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+    </div>
+</div>

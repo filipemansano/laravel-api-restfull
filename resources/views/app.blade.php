@@ -94,6 +94,7 @@
     <script type="text/javascript" src="{{{ asset('js/angular-toastr.js') }}}"></script>
     <script type="text/javascript" src="{{{ asset('js/app.js') }}}"></script>
     <script type="text/javascript" src="{{{ asset('js/films.component.js') }}}"></script>
+    <script type="text/javascript" src="{{{ asset('js/films-detail.component.js') }}}"></script>
     
 </body>
 

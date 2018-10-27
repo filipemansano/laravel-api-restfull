@@ -42,3 +42,10 @@
       margin-left: 10px;
       display: none;
   }
+
+  .rating-block {
+    background-color: #FAFAFA;
+    border: 1px solid #EFEFEF;
+    padding: 15px 15px 20px 15px;
+    border-radius: 3px;
+}

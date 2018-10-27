@@ -1,8 +1,13 @@
 <section class="jumbotron text-center">
     <div class="container">
-        <h1 class="jumbotron-heading">{{ vm.films.film.name }}</h1>
-        <img src="img/films/{{ vm.films.film.photo }}" alt="" />
-        <p class="lead text-muted">{{ vm.films.film.description }}</p>
+
+        <div ui-sref="filmDetail({ slugName: vm.films.film.slug_name, film: vm.films.film })">
+            <h1 class="jumbotron-heading">{{ vm.films.film.name }}</h1>
+            <img src="img/films/{{ vm.films.film.photo }}" alt="" />
+        </div>
+        
+        <br/>
+        <small>(click on image or title for mor detail)</small>
         <p>
             <a href="#" ng-disabled="vm.loading" ng-click="vm.changeFilm('previous')" ng-show="vm.films.current > 1" class="btn btn-secondary my-2"><i class="fa fa-angle-left"></i> Previous Film</a>
             <a href="#" ng-disabled="vm.loading" ng-click="vm.changeFilm('next')" ng-show="vm.films.total > vm.films.current" class="btn btn-primary my-2">Next Film <i class="fa fa-angle-right"></i> </a>
@@ -12,5 +17,6 @@
 
 <div class="album py-5 bg-light">
     <div class="container">
+        <div ui-view></div>
     </div>
 </div>
