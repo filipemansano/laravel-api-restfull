@@ -131,6 +131,6 @@ class FilmsController extends Controller
             throw $e;
         }
 
-        return response()->json([ 'id' => $film->id], 200);
+        return response()->json([ 'id' => $film->id, 'slug_name' => $slugName], 200);
     }
 }

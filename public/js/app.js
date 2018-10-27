@@ -76,9 +76,18 @@
             },
         });
 
+        $stateProvider.state('addFilm', {
+            url: '/films/new',
+            component: 'filmsAdd',
+            resolve: {
+                genres: function (AjaxService) {
+                    return AjaxService.request("GET", "genres", {});
+                }
+            },
+        });
+
         $stateProvider.state('filmDetail', {
             url: '/films/:slugName',
-            //parent: 'films',
             component: 'filmDetail',
             resolve: {
                 film: function ($transition$, AjaxService) {
@@ -123,7 +132,7 @@
     }
 
     /* @ngInject */
-    function Interceptor($rootScope, $q, toastr, $localStorage) {
+    function Interceptor($rootScope, $q, toastr, $localStorage, $http) {
 
         return {
             responseError: function (error) {
@@ -151,7 +160,7 @@
 
                 toastr.error(msgError, titleError);
 
-                if (error.code == 401) {
+                if (error.status == 401) {
 
                     $rootScope.user = {
                         name: null,

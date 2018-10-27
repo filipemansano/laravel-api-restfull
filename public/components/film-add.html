@@ -1,0 +1,41 @@
+<section >
+    <div class="container">
+
+        <div class="card mt-5">
+            <div class="card-body">
+                <h3 class="card-title">New Film</h3>
+                <label for="name-film">Name</label>
+                <input id="name-film" type="text" class="form-control mb-2" ng-model="vm.film.name" />
+                
+                <label for="description-film">Description</label>
+                <textarea id="description-film" class="form-control mb-2" ng-model="vm.film.description" rows="3"></textarea>
+                
+                <label for="release_date-film">Release Date</label>
+                <input id="release_date-film" type="date" class="form-control mb-4" ng-model="vm.release_date" />
+                
+                <label for="rating-film">Rating <strong>{{ vm.film.rating }}</strong></label>
+                <input id="rating-film" type="range" min="1" max="5" class="form-control mb-2" ng-model="vm.film.rating" />
+                
+                <label for="ticket_price-film">Price</label>
+                <input id="ticket_price-film" type="text" class="form-control mb-2" ng-model="vm.film.ticket_price" />
+                
+                <label for="country-film">Country</label>
+                <input id="country-film" type="text" class="form-control mb-2" ng-model="vm.film.country" />
+                
+
+                <label for="genres-film">Genres <small>(use the control key to select more than one item)</small></label>
+                <select id="genres-film" class="form-control mb-2" ng-model="vm.film.genres" multiple>
+                    <option value="{{ genre.id }}" ng-repeat="genre in vm.genres">
+                        {{ genre.name }}
+                    </option>
+                </select>
+
+                <label for="photo-film">Photo</label>
+                <input id="photo-film" type="file" class="form-control mb-2" ng-model="vm.photo" />
+                
+                <button type="button" class="btn btn-primary w-100" ng-click="vm.createFilm()">Create</button>
+                
+            </div>
+        </div>
+    </div>
+</section>

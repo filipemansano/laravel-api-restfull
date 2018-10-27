@@ -60,15 +60,15 @@
         <div class="navbar navbar-dark bg-dark box-shadow">
             <div class="container d-flex justify-content-between">
                 <a href="/#!/films" class="navbar-brand d-flex align-items-center">
-                    <strong>Film Album</strong> <i id="loading" class="fa fa-sync fa-spin"></i>
+                    <strong><i class="fab fa-laravel"></i> Laravel Test</strong> <i id="loading" class="fa fa-sync fa-spin"></i>
                 </a>
-                
+
                 <button ng-if="!user.logged" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span> Login / Register
                 </button>
 
-                <span class="text-white" ng-show="user.logged">Bem vindo <span ng-bind="user.name"></span></span>
+                <span class="text-white" ng-show="user.logged">Welcome <span ng-bind="user.name"></span>  <button ui-sref="addFilm" class="ml-3 btn btn-primary btn-xs"><i class="fa fa-plus"></i>  Create new Film</button></span>
             </div>
         </div>
     </header>
@@ -83,10 +83,7 @@
         <div class="container">
             
             <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
-            <p>New to Bootstrap?
-                <a href="../../">Visit the homepage</a> or read our
-                <a href="../../getting-started/">getting started guide</a>.
-            </p>
+            
         </div>
     </footer>
 
@@ -111,6 +108,7 @@
     <script type="text/javascript" src="{{{ asset('js/app.js') }}}"></script>
     <script type="text/javascript" src="{{{ asset('js/films.component.js') }}}"></script>
     <script type="text/javascript" src="{{{ asset('js/films-detail.component.js') }}}"></script>
+    <script type="text/javascript" src="{{{ asset('js/films-add.component.js') }}}"></script>
     <script type="text/javascript" src="{{{ asset('js/auth.controller.js') }}}"></script>
     
 </body>
