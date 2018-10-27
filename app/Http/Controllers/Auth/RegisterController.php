@@ -56,7 +56,7 @@ class RegisterController extends Controller
         $validator = $this->validator($bodyContent);
 
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 401);
+            return response()->json(['validation_error'=>$validator->errors()], 401);
         }
         
         $user = $this->create($bodyContent);

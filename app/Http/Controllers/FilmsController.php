@@ -59,7 +59,7 @@ class FilmsController extends Controller
         $validator = $this->validator($bodyContent);
         
         if ($validator->fails()) { 
-            return response()->json(['error'=>$validator->errors()], 400);
+            return response()->json(['validation_error'=>$validator->errors()], 400);
         }
 
         // remove all non-ascii character, replace one or plus spaces to - and set string to lower case

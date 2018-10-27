@@ -27,6 +27,7 @@ class CreateCommentsTable extends Migration
             $table->foreign('film_id')
                 ->references('id')->on('films')
                 ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
