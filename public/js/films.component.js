@@ -32,6 +32,7 @@
             AjaxService.request("GET", "films/" + pag , {}).then(
                 function(film){
                     vm.films = film;
+                    $state.go("filmDetail", { slugName: film.film.slug_name});
                 }
             ).finally(function(){
                 vm.loading = false;

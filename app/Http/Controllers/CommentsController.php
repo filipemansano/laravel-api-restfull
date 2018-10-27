@@ -49,4 +49,15 @@ class CommentsController extends Controller
 
         return response()->json([ 'id' => $comment->id], 200);
     }
+
+    public function searchByFilm(Request $request, $id){
+
+        $comments = Comment::where("film_id", $id)->with("user");
+
+        if($comments->count() == 0){
+            return response()->json([], 204);
+        }
+
+        return response()->json($comments->get());
+    }
 }

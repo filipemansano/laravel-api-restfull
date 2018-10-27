@@ -12,7 +12,9 @@
             templateUrl: 'components/film-detail.html'
         });
 
-    function FilmDetailController() {
+    function FilmDetailController(AjaxService) {
+
         var vm = this;
+        return vm;
     }
 })();

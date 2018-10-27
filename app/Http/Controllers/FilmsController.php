@@ -38,7 +38,7 @@ class FilmsController extends Controller
 
     public function search(Request $request, $slug){
 
-        $film = Film::where("slug_name", $slug)->first();
+        $film = Film::where("slug_name", $slug)->with("comments","comments.user")->first();
 
         if(is_null($film)){
             return response()->json(['msg' => 'film not exists'], 404);

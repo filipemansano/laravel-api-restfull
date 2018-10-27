@@ -17,4 +17,8 @@ class Comment extends Model
     public function films(){
         return $this->hasMany(Film::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

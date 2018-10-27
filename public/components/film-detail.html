@@ -11,7 +11,8 @@
             <div class="rating-block float-right" style="max-width:300px;">
                 <h4>Average user rating</h4>
                 <h2 class="bold padding-bottom-7">{{ vm.film.rating }} <small>/ 5</small></h2>
-                <button type="button" class="btn btn-sm mr-1" ng-class="{'btn-warning': vm.film.rating >= rating, 'btn-default': vm.film.rating < rating}" ng-repeat="rating in [1,2,3,4,5]">
+                <button type="button" class="btn btn-sm mr-1" ng-class="{'btn-warning': vm.film.rating >= rating, 'btn-default': vm.film.rating < rating}"
+                    ng-repeat="rating in [1,2,3,4,5]">
                     <i class="fa fa-star"></i>
                 </button>
             </div>
@@ -19,5 +20,19 @@
 
         <div class="clearfix"></div>
 
+    </div>
+</div>
+
+<hr />
+<h4>Comments</h4>
+
+<div>
+    <div class="card card-default mt-2" ng-repeat="comment in vm.film.comments">
+        <div class="card-header">
+            <strong>{{ comment.user.name }}</strong> <span class="text-muted">{{ comment.user.created_at | date: "yyyy-MM-ddTHH:mm:ss" }}</span>
+        </div>
+        <div class="card-body">
+            {{ comment.comment }}
+        </div><!-- /panel-body -->
     </div>
 </div>

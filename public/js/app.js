@@ -38,6 +38,7 @@
         $stateProvider.state('films', {
             url: '/films',
             component: 'films',
+            reload: 'filmDetail',
             resolve: {
                 films: function (AjaxService) {
                     return AjaxService.request("GET", "films/1", {});

@@ -9,14 +9,15 @@
         <br/>
         <small>(click on image or title for mor detail)</small>
         <p>
-            <a href="#" ng-disabled="vm.loading" ng-click="vm.changeFilm('previous')" ng-show="vm.films.current > 1" class="btn btn-secondary my-2"><i class="fa fa-angle-left"></i> Previous Film</a>
-            <a href="#" ng-disabled="vm.loading" ng-click="vm.changeFilm('next')" ng-show="vm.films.total > vm.films.current" class="btn btn-primary my-2">Next Film <i class="fa fa-angle-right"></i> </a>
+            <a style="color:white;" ng-disabled="vm.loading" ng-click="vm.changeFilm('previous')" ng-show="vm.films.current > 1" class="btn btn-secondary my-2"><i class="fa fa-angle-left"></i> Previous Film</a>
+            <a style="color:white;" ng-disabled="vm.loading" ng-click="vm.changeFilm('next')" ng-show="vm.films.total > vm.films.current" class="btn btn-primary my-2">Next Film <i class="fa fa-angle-right"></i> </a>
         </p>
     </div>
 </section>
 
 <div class="album py-5 bg-light">
     <div class="container">
-        <div ui-view></div>
+        <div ng-show="vm.loading" class="text-center"><i class="fa fa-sync fa-spin fa-3x"></i></div>
+        <div ng-show="!vm.loading" ui-view></div>
     </div>
 </div>
